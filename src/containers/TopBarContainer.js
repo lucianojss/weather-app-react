@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { getForecastByLocation } from '../actions/forecastListAction';
 import TopBar from '../components/TopBar';
@@ -9,8 +8,7 @@ class TopBarContainer extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            lastSearchedCity: '',
-            isMetricUnit: false
+            lastSearchedCity: ''
         };
 
         this.handleOnSubmitClick = this.handleOnSubmitClick.bind(this);
@@ -19,21 +17,27 @@ class TopBarContainer extends Component {
     }
 
     handleOnSubmitClick(query) {
-        this.props.getForecastByLocation(query);
+        this.props.getForecastByLocation(query, this.props.isMetricUnit);
         this.setState({ lastSearchedCity: query });
     }
 
     handleOnRefreshClick() {
-        this.props.getForecastByLocation(this.state.lastSearchedCity);
+        this.props.getForecastByLocation(this.state.lastSearchedCity, this.props.isMetricUnit);
     }
 
     handleOnUnitChange(isMetricUnit) {
         this.setState({ isMetricUnit });
         this.props.setUnitSelector(isMetricUnit);
+
+        if (this.state.lastSearchedCity !== '') {
+            this.props.getForecastByLocation(this.state.lastSearchedCity, isMetricUnit);
+        }
     }
 
     render() {
-        return (<TopBar
+        const { isMetricUnit } = this.props;
+
+        return (<TopBar unit={isMetricUnit}
             onSubmit={this.handleOnSubmitClick}
             onRefresh={this.handleOnRefreshClick}
             onUnitsChange={this.handleOnUnitChange}
@@ -42,7 +46,7 @@ class TopBarContainer extends Component {
 }
 
 const mapDispatchToProps = dispatch => ({
-    getForecastByLocation: location => dispatch(getForecastByLocation(location)),
+    getForecastByLocation: (location, unit) => dispatch(getForecastByLocation(location, unit)),
     setUnitSelector: isMetricUnit => dispatch(setUnitSelector(isMetricUnit))
 });
 
@@ -51,13 +55,5 @@ const mapStateToProps = state => ({
     error: state.forecastList.error,
     isMetricUnit: state.unitsSelector
 });
-
-TopBarContainer.propTypes = {
-    loading: PropTypes.bool.isRequired,
-    error: PropTypes.object,
-    forecast: PropTypes.arrayOf(PropTypes.object),
-    weather: PropTypes.object,
-    units: PropTypes.object
-}
 
 export default connect(mapStateToProps, mapDispatchToProps)(TopBarContainer);

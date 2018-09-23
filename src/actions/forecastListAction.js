@@ -9,15 +9,25 @@ import {
  * Action get 5 days Forecast for a given location
  *
  * @param {String} location - Book id to be fetched
+ * @param {Boolean} unit - True metric unit, false imperial
  */
-export const getForecastByLocation = location => async dispatch => {
+export const getForecastByLocation = (location, unit) => async dispatch => {
+
+    if (!location || location === '') {
+        return dispatch({
+            type: FORECAST_LIST_ACTIONS.GET_FORECAST_SUCCESS,
+            forecast: null,
+            weather: null,
+            units: null
+        });
+    }
 
     dispatch({
         type: FORECAST_LIST_ACTIONS.GET_FORECAST_LOADING,
     });
 
     try {
-        const result = await getForecast(location);
+        const result = await getForecast(location, unit);
 
         if (result && result.query && result.query.results && result.query.results.channel) {
 
