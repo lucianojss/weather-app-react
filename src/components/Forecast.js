@@ -2,25 +2,22 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
-import CardHeader from '@material-ui/core/CardHeader';
 import CardContent from '@material-ui/core/CardContent';
-import IconButton from '@material-ui/core/IconButton';
 import Typography from '@material-ui/core/Typography';
-import DeleteIcon from '@material-ui/icons/Delete';
-import EditIcon from '@material-ui/icons/Edit';
-import { Redirect } from 'react-router-dom';
+import WeatherIcon from 'react-icons-weather';
 
 const styles = {
     card: {
         maxWidth: '100%',
         marginBottom: '10px'
     },
-    media: {
-        height: 0,
+    cardContent: {
+        textAlign: 'center'
     },
-    actions: {
-        display: 'flex',
-    },
+    icon: {
+		margin: 10,
+		fontSize: '2em'
+	}
 };
 
 class Forecast extends Component {
@@ -28,11 +25,11 @@ class Forecast extends Component {
         const { classes, code, date, high, low, text, units } = this.props;
         return (
             <Card className={classes.card}>
-                <CardContent>
-                    <Typography>{date}</Typography>
-                    <Typography>{text}</Typography>
-                    <Typography>{high} º{units}</Typography>
-                    <Typography>{low} º{units}</Typography>
+                <CardContent className={classes.cardContent}>
+                    <Typography variant="subheading">{date}</Typography>
+                    <Typography>Low {low} º{units} | Max {high} º{units}</Typography>
+                    <WeatherIcon className={classes.icon} name="yahoo" iconId={code}/>
+                    <Typography variant="subheading">{text}</Typography>
                 </CardContent>
             </Card>
         );

@@ -4,46 +4,44 @@ import { withStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import CardHeader from '@material-ui/core/CardHeader';
 import CardContent from '@material-ui/core/CardContent';
-import IconButton from '@material-ui/core/IconButton';
 import Typography from '@material-ui/core/Typography';
-import DeleteIcon from '@material-ui/icons/Delete';
-import EditIcon from '@material-ui/icons/Edit';
-import { Redirect } from 'react-router-dom';
+import WeatherIcon from 'react-icons-weather';
 
 const styles = {
     card: {
         maxWidth: '100%',
-        marginBottom: '20px'
+        marginBottom: 20
     },
-    media: {
-        height: 0,
-    },
-    actions: {
-        display: 'flex',
-    },
-    astronomy: {
+    astronomyContainer: {
         display: 'flex'
+    },
+    sunset: {
+        paddingLeft: 20
     },
     weather: {
         textAlign: 'center'
     },
-    other: {
-
+    windContainer: {
+        display: 'flex'
     },
-    wind: {
-        display: 'flex',
-        icon: {
-            margin: '5px'
-        },
-        text: {
-
-        }
+    windText: {
+        paddingLeft: 5
+    },
+    icon: {
+        fontSize: '3em',
+        margin: 10
+    },
+    atmosphereContainer: {
+        display: 'flex'
+    },
+    humidityText: {
+        paddingLeft: 12
     }
 };
 
 class Weather extends Component {
     render() {
-        const { classes, weather, location, atmosphere, wind, lastBuildDate, condition, astronomy, units } = this.props;
+        const { classes, location, atmosphere, wind, lastBuildDate, condition, astronomy, units } = this.props;
         const locationField = location.city.trim() === location.region.trim() ? `${location.city}, ${location.country}` : `${location.city}, ${location.region}, ${location.country}`;
 
         return (
@@ -53,27 +51,36 @@ class Weather extends Component {
                     subheader={lastBuildDate}>
                 </CardHeader>
                 <CardContent>
-                    <div className={classes.wind}>
-                        <Typography className={classes.wind.icon} color="textPrimary">
-                            {'Wind icon'}
+                    <div className={classes.astronomyContainer}>
+                        <Typography color="textSecondary">
+                            <i className="wi wi-sunrise"></i>  {astronomy.sunrise}
                         </Typography>
-                        <Typography className={classes.wind.text} color="textPrimary">
+                        <Typography className={classes.sunset} color="textSecondary">
+                            <i className="wi wi-sunset"></i>  {astronomy.sunset}
+                        </Typography>
+                    </div>
+                    <div className={classes.windContainer}>
+                        <Typography color="textSecondary">
+                            <i className="wi wi-strong-wind"></i>
+                        </Typography>
+                        <Typography color="textSecondary" className={classes.windText}>
                             {wind.speed} {units.speed}
                         </Typography>
                     </div>
-                    <div className={classes.astronomy}>
-                        <Typography className={classes.sunrise} color="textSecondary">
-                            {astronomy.sunrise}
+                    <div className={classes.atmosphereContainer}>
+                        <Typography color="textSecondary">
+                            <i className="wi wi-humidity"></i>
                         </Typography>
-                        <Typography className={classes.sunset} color="textSecondary">
-                            {astronomy.sunset}
+                        <Typography color="textSecondary" className={classes.humidityText}>
+                            {atmosphere.humidity} %
                         </Typography>
                     </div>
                     <div className={classes.weather}>
-                        <Typography className={classes.title} color="textPrimary">
+                        <Typography variant="headline" color="textPrimary">
                             {condition.temp} º{units.temperature}
                         </Typography>
-                        <Typography className={classes.title} color="textPrimary">
+                        <WeatherIcon className={classes.icon} name="yahoo" iconId={condition.code} />
+                        <Typography variant="subheading" color="textPrimary">
                             {condition.text}
                         </Typography>
                     </div>
