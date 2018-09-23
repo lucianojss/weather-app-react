@@ -35,8 +35,7 @@ const styles = theme => ({
         marginLeft: 0,
         width: '100%',
         [theme.breakpoints.up('sm')]: {
-            marginLeft: theme.spacing.unit * 3,
-            maxWidth: '500px'
+            marginLeft: theme.spacing.unit * 3
         },
     },
     searchIcon: {
