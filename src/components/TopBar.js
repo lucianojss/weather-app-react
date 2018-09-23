@@ -10,6 +10,7 @@ import { fade } from '@material-ui/core/styles/colorManipulator';
 import RefreshIcon from '@material-ui/icons/Refresh';
 import IconButton from '@material-ui/core/IconButton';
 import Switch from '@material-ui/core/Switch';
+import Tooltip from '@material-ui/core/Tooltip';
 
 const styles = theme => ({
     root: {
@@ -117,16 +118,17 @@ class TopBar extends React.Component {
                                 }}
                             />
                         </form>
-                        <IconButton onClick={this.handleOnRefreshClick} color="inherit">
-                            <RefreshIcon />
-                        </IconButton>
+                        <Tooltip title="Refresh">
+                            <IconButton onClick={this.handleOnRefreshClick} color="inherit">
+                                <RefreshIcon />
+                            </IconButton>
+                        </Tooltip>
                         <Typography color="inherit">
                             ºF
                         </Typography>
-                        <Switch
-                            checked={unit}
-                            onChange={this.handleOnUnitsChange}
-                        />
+                        <Tooltip title="Toggle Units">
+                            <Switch checked={unit} onChange={this.handleOnUnitsChange}/>
+                        </Tooltip>
                         <Typography color="inherit">
                             ºC
                         </Typography>

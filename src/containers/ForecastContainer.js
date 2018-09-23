@@ -14,7 +14,9 @@ import { Error } from '@material-ui/icons';
 
 const styles = {
 	container: {
-		padding: 10
+		padding: 10,
+		height: '100vh',
+		backgroundColor: '#fafafa'
 	},
 	errorContainer: {
 		height: '100vh',
