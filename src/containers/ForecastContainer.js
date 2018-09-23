@@ -11,11 +11,12 @@ import { withStyles } from '@material-ui/core/styles';
 import ErrorOutlineTwoTone from '@material-ui/icons/ErrorOutlineTwoTone';
 import Typography from '@material-ui/core/Typography';
 import { Error } from '@material-ui/icons';
+import Grid from '@material-ui/core/Grid';
 
 const styles = {
 	container: {
 		padding: 10,
-		height: '100vh',
+		height: '100%',
 		backgroundColor: '#fafafa'
 	},
 	errorContainer: {
@@ -28,6 +29,9 @@ const styles = {
 	errorIcon: {
 		margin: 10,
 		fontSize: 60
+	},
+	gridItem: {
+		width: '100%'
 	}
 }
 
@@ -71,7 +75,14 @@ class ForecastContainer extends Component {
 		return (
 			<div className={classes.container}>
 				{weather && <Weather {...weather} units={units} />}
-				{forecast.map((forecast, index) => <Forecast key={index} {...forecast} units={units.temperature} />)}
+				<Grid
+				 	spacing={16}
+					container
+					direction="row"
+					justify="left"
+					alignItems="center">
+					{forecast.map((forecast, index) => <Grid className={classes.gridItem} item xl={2} lg={6} md={6} sm={6}> <Forecast key={index} {...forecast} units={units.temperature}/> </Grid>)}
+				</Grid>
 			</div>
 		);
 	}
