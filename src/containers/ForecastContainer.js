@@ -73,12 +73,6 @@ class ForecastContainer extends Component {
 			</div>
 		);
 	}
-
-	componentWillMount = () => {
-		if (this.props.match.params.location) {
-			this.props.getForecastByLocation(this.props.match.params.location);
-		}
-	};
 }
 
 const mapDispatchToProps = dispatch => ({

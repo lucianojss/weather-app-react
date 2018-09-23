@@ -70,9 +70,10 @@ class TopBar extends React.Component {
         super(props);
 
         this.state = {
-            queryString: '',
-            isMetricUnit: false
+            queryString: ''
         };
+
+        this.handleOnUnitsChange = this.handleOnUnitsChange.bind(this);
     }
 
     handleOnSearchInputChange = event => {
@@ -89,12 +90,12 @@ class TopBar extends React.Component {
     }
 
     handleOnUnitsChange = () =>  {
-        this.setState({ isMetricUnit: !this.state.isMetricUnit });
-        this.props.onUnitsChange(this.state.isMetricUnit);
+        const newState = !this.props.unit;
+        this.props.onUnitsChange(newState);
     }
 
     render() {
-        const { classes } = this.props;
+        const { classes, unit } = this.props;
 
         return (
             <div className={classes.root}>
@@ -124,7 +125,7 @@ class TopBar extends React.Component {
                             ºF
                         </Typography>
                         <Switch
-                            checked={this.state.isMetricUnit}
+                            checked={unit}
                             onChange={this.handleOnUnitsChange}
                         />
                         <Typography color="inherit">
@@ -141,7 +142,8 @@ TopBar.propTypes = {
     classes: PropTypes.object.isRequired,
     onSubmit: PropTypes.func.isRequired,
     onRefresh: PropTypes.func.isRequired,
-    onUnitsChange: PropTypes.func.isRequired
+    onUnitsChange: PropTypes.func.isRequired,
+    unit: PropTypes.bool.isRequired
 };
 
 export default withStyles(styles)(TopBar);
