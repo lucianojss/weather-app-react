@@ -7,12 +7,25 @@ import Forecast from '../components/Forecast';
 
 import { getForecastByLocation } from '../actions/forecastListAction';
 import LinearProgress from '@material-ui/core/LinearProgress';
-import Snackbar from '@material-ui/core/Snackbar';
 import { withStyles } from '@material-ui/core/styles';
+import ErrorOutlineTwoTone from '@material-ui/icons/ErrorOutlineTwoTone';
+import Typography from '@material-ui/core/Typography';
+import { Error } from '@material-ui/icons';
 
 const styles = {
 	container: {
-		padding: '10px'
+		padding: 10
+	},
+	errorContainer: {
+		height: '100vh',
+		display: 'flex',
+		flexDirection: 'column',
+		alignItems: 'center',
+		justifyContent: 'center'
+	},
+	errorIcon: {
+		margin: 10,
+		fontSize: 60
 	}
 }
 
@@ -26,25 +39,14 @@ class ForecastContainer extends Component {
 
 	render() {
 		const { classes, weather, forecast, loading, units, error } = this.props
-		//TODO: not found error
-		//No weather forecast found for the given location, try another one.
 
 		if (error) {
 			return (
-				<div>
-					<Snackbar
-						anchorOrigin={{
-							vertical: 'bottom',
-							horizontal: 'center',
-						}}
-						open={!!this.props.error}
-						autoHideDuration={2000}
-						message={
-							<span>
-								{this.props.error.message}
-							</span>
-						}
-					/>
+				<div className={classes.errorContainer}>
+					<Error className={classes.errorIcon} />
+					<Typography varint="caption" color="inherit">
+						Something went wrong, try again later.
+					</Typography>
 				</div>
 			)
 		}
@@ -53,13 +55,20 @@ class ForecastContainer extends Component {
 			return (<LinearProgress color="secondary" />);
 		}
 
-		if(!weather || !forecast){
-			return (<span>NOT FOUND</span>)
+		if (!weather && !forecast) {
+			return (
+				<div className={classes.errorContainer}>
+					<ErrorOutlineTwoTone className={classes.errorIcon} />
+					<Typography varint="caption" color="inherit">
+						Weather not found for the selected city.
+					</Typography>
+				</div>
+			)
 		}
 
 		return (
 			<div className={classes.container}>
-				<Weather {...weather} units={units} />
+				{weather && <Weather {...weather} units={units} />}
 				{forecast.map((forecast, index) => <Forecast key={index} {...forecast} units={units.temperature} />)}
 			</div>
 		);

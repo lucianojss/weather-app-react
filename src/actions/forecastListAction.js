@@ -50,7 +50,12 @@ export const getForecastByLocation = location => async dispatch => {
             });
 
         } else {
-            throw new Error('not found');
+            return dispatch({
+                type: FORECAST_LIST_ACTIONS.GET_FORECAST_SUCCESS,
+                forecast: null,
+                weather: null,
+                units: null
+            });
         }
     } catch (error) {
         return dispatch({
