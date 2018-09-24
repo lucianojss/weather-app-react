@@ -9,7 +9,7 @@ import LinearProgress from '@material-ui/core/LinearProgress';
 import { withStyles } from '@material-ui/core/styles';
 import ErrorOutlineTwoTone from '@material-ui/icons/ErrorOutlineTwoTone';
 import Typography from '@material-ui/core/Typography';
-import { Error } from '@material-ui/icons';
+import Error from '@material-ui/icons/Error';
 import Grid from '@material-ui/core/Grid';
 
 const styles = {
