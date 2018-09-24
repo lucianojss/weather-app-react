@@ -9,9 +9,9 @@ I decided to use redux for the state management of the application and react.
 Also used Material UI that gives some UI components out of the box.
 
 With more time I would like to add:
-    * Service Worker to get offline and cache support.
-    * Store Unit preferences from the user.
-    * Finish Unit tests
+- Service Worker to get offline and cache support.
+- Store Unit preferences from the user.
+- Finish Unit tests
 
 # Prerequisites
 
