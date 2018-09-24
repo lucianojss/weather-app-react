@@ -15,8 +15,7 @@ import Grid from '@material-ui/core/Grid';
 const styles = {
 	container: {
 		padding: 10,
-		height: '100%',
-		backgroundColor: '#fafafa'
+		height: '100%'
 	},
 	errorContainer: {
 		height: '100vh',
