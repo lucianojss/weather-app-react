@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
 import Weather from '../components/Weather';
@@ -99,14 +98,5 @@ const mapStateToProps = state => ({
 	weather: state.forecastList.weather,
 	units: state.forecastList.units
 });
-
-ForecastContainer.propTypes = {
-	loading: PropTypes.bool.isRequired,
-	error: PropTypes.object,
-	forecast: PropTypes.arrayOf(PropTypes.object),
-	weather: PropTypes.object,
-	units: PropTypes.object,
-	onRefreshClick: PropTypes.func
-}
 
 export default withStyles(styles)(connect(mapStateToProps, mapDispatchToProps)(ForecastContainer));

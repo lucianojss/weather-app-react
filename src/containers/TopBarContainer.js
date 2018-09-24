@@ -51,8 +51,6 @@ const mapDispatchToProps = dispatch => ({
 });
 
 const mapStateToProps = state => ({
-    loading: state.forecastList.loading,
-    error: state.forecastList.error,
     isMetricUnit: state.unitsSelector
 });
 
