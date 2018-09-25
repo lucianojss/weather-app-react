@@ -1,0 +1,38 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`#Forecast Should render Forecast Component correctly 1`] = `
+<div
+  className="MuiPaper-root-5 MuiPaper-elevation1-8 MuiPaper-rounded-6 MuiCard-root-4 Forecast-card-1"
+>
+  <div
+    className="MuiCardContent-root-32 Forecast-cardContent-2"
+  >
+    <h3
+      className="MuiTypography-root-33 MuiTypography-subheading-40"
+    >
+      random Date
+    </h3>
+    <p
+      className="MuiTypography-root-33 MuiTypography-body1-42"
+    >
+      Low 
+      -50
+       º
+      C
+       | Max 
+      26
+       º
+      C
+    </p>
+    <i
+      className="wi wi-yahoo-19 Forecast-icon-3"
+      name="yahoo"
+    />
+    <h3
+      className="MuiTypography-root-33 MuiTypography-subheading-40"
+    >
+      random text
+    </h3>
+  </div>
+</div>
+`;

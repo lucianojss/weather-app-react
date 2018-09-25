@@ -4,7 +4,6 @@ import { connect } from 'react-redux';
 import Weather from '../components/Weather';
 import Forecast from '../components/Forecast';
 
-import { getForecastByLocation } from '../actions/forecastListAction';
 import LinearProgress from '@material-ui/core/LinearProgress';
 import { withStyles } from '@material-ui/core/styles';
 import ErrorOutlineTwoTone from '@material-ui/icons/ErrorOutlineTwoTone';
@@ -86,10 +85,6 @@ class ForecastContainer extends Component {
 	}
 }
 
-const mapDispatchToProps = dispatch => ({
-	getForecastByLocation: location => dispatch(getForecastByLocation(location)),
-});
-
 const mapStateToProps = state => ({
 	loading: state.forecastList.loading,
 	error: state.forecastList.error,
@@ -98,4 +93,4 @@ const mapStateToProps = state => ({
 	units: state.forecastList.units
 });
 
-export default withStyles(styles)(connect(mapStateToProps, mapDispatchToProps)(ForecastContainer));
+export default withStyles(styles)(connect(mapStateToProps)(ForecastContainer));

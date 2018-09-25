@@ -17,8 +17,9 @@ class TopBarContainer extends Component {
     }
 
     handleOnSubmitClick(query) {
-        this.props.getForecastByLocation(query, this.props.isMetricUnit);
+        const x = this.props.getForecastByLocation(query, this.props.isMetricUnit);
         this.setState({ lastSearchedCity: query });
+        x.reject();
     }
 
     handleOnRefreshClick() {
